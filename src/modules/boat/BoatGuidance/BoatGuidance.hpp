@@ -115,27 +115,21 @@ private:
 	uORB::Subscription _vehicle_global_position_sub{ORB_ID(vehicle_global_position)};
 
 	uORB::Publication<boat_setpoint_s> _boat_setpoint_pub{ORB_ID(boat_setpoint)};
-
 	position_setpoint_triplet_s _position_setpoint_triplet{};
 	vehicle_global_position_s _vehicle_global_position{};
 
 	GuidanceState _currentState;
 
-	float _desired_angular_velocity;
+	float _desired_angular_velocity{};
+	float _max_angular_velocity{};
+	float _max_speed{};
 
-	float _max_speed;
-	float _max_angular_velocity;
-
-	matrix::Vector2d _current_waypoint;
-
-	VelocitySmoothing _forwards_velocity_smoothing;
-	PositionSmoothing _position_smoothing;
-
-	ECL_L1_Pos_Controller _l1_guidance;
-
-	Vector2f _previous_local_position{};
-
+	VelocitySmoothing _forwards_velocity_smoothing{};
+	PositionSmoothing _position_smoothing{};
 	MapProjection _global_local_proj_ref{};
+	matrix::Vector2d _current_waypoint{};
+	ECL_L1_Pos_Controller _l1_guidance{};
+	Vector2f _previous_local_position{};
 
 	DEFINE_PARAMETERS(
 		(ParamFloat<px4::params::NAV_ACC_RAD>) _param_nav_acc_rad,

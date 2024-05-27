@@ -61,6 +61,11 @@ void Boat::updateParams()
 	_boat_guidance.setMaxAngularVelocity(_max_angular_velocity);
 	_boat_kinematics.setMaxAngularVelocity(_max_angular_velocity);
 	printf("max angular velocity: %f\n", (double)_max_angular_velocity);
+
+	// _boat_guidance_pp.setLookaheadDistance(_param_bt_lookahead_distance.get());
+	_boat_guidance_pp.setMaxAngularVelocity(_max_angular_velocity);
+	_boat_guidance_pp.setMaxSpeed(_max_speed);
+
 }
 
 void Boat::Run()
@@ -130,12 +135,13 @@ void Boat::Run()
 	} else if (_mission_driving) {
 		// Mission mode
 		// directly receive setpoints from the guidance library
-		printf("I'm in mission mode\n");
-		_boat_guidance.computeGuidance(
-			_boat_control.getVehicleYaw(),
-			_boat_control.getLocalPosition(),
-			dt
-		);
+		// printf("I'm in mission mode\n");
+		// _boat_guidance.computeGuidance(
+		// 	_boat_control.getVehicleYaw(),
+		// 	_boat_control.getLocalPosition(),
+		// 	dt
+		// );
+		_boat_guidance_pp.purePursuit();
 	}
 
 	_boat_control.control(dt);

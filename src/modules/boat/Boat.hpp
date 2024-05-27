@@ -51,6 +51,7 @@
 
 #include "BoatControl/BoatControl.hpp"
 #include "BoatGuidance/BoatGuidance.hpp"
+#include "BoatGuidance/BoatGuidancePP.hpp"
 #include "BoatKinematics/BoatKinematics.hpp"
 
 using namespace time_literals;
@@ -93,6 +94,7 @@ private:
 	BoatGuidance _boat_guidance{this};
 	BoatControl _boat_control{this};
 	BoatKinematics _boat_kinematics{this};
+	BoatGuidancePP _boat_guidance_pp{this};
 
 	float _max_speed{0.f};
 	float _max_angular_velocity{0.f};
